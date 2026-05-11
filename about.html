@@ -113,6 +113,34 @@
       color: var(--text);
     }
 
+    .slide-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .slide-bullets li {
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .slide-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 8px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
     /* ── TRAIT PAIR ── */
     .trait-pair {
       display: grid;
@@ -363,14 +391,11 @@
         A true<br>
         <span class="hl hl-peach"><strong>Talent Partner.</strong></span>
       </h2>
-      <p class="slide-body">
-        I started as a Senior Recruiter and took on additional responsibility for employer branding
-        alongside that role. From there I moved into a two-year period of global change and project management,
-        then back into TA with broader scope and team leadership.<br><br>
-        That breadth shapes how I work: I think in systems,
-        communicate across every level from intern to C-suite,
-        and treat every hire as a <strong>long-term investment in the team</strong>.
-      </p>
+      <ul class="slide-bullets">
+        <li>Senior Recruiter &amp; Employer Branding Specialist</li>
+        <li>2 years in global change &amp; project management</li>
+        <li>TA Lead with team leadership and broader scope</li>
+      </ul>
     </div>
 
     <!-- SLIDE 3: TRAITS 1/2 -->
