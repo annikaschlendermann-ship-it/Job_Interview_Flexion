@@ -657,6 +657,7 @@
       .section { padding: 60px 20px; }
       .section-row { grid-template-columns: 1fr; gap: 12px; }
       .section-tag { display: none; }
+      .section-tag.collapsible-trigger { display: flex; }
       hr { margin: 0 20px; }
       .stat-grid, .pillar-grid, .plan-grid { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns: 1fr; }
@@ -741,8 +742,9 @@
   <section id="value" class="section">
     <div class="section-row">
       <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">/001 Value / <span class="chevron">▾</span></div>
-      <div class="collapsible-body">
-        <h2 class="h2">Three things I bring<br><span class="hl hl-lav">to this role.</span></h2>
+      <div>
+        <h2 class="h2" style="cursor:pointer;" onclick="toggleSection(this)">Three things I bring<br><span class="hl hl-lav">to this role.</span></h2>
+        <div class="collapsible-body">
         <p class="body-text">
           Three areas where I have built direct, hands-on experience:
           proactive sourcing, process improvement, and employer brand development.
@@ -778,6 +780,7 @@
             <div class="pillar-metric">250k+ candidate reach<br>+38% referrals &middot; +40% brand lift</div>
           </div>
         </div>
+        </div>
       </div>
     </div>
   </section>
@@ -788,8 +791,9 @@
   <section id="why" class="section">
     <div class="section-row">
       <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">/002 Why Flexion / <span class="chevron">▾</span></div>
-      <div class="collapsible-body">
-        <h2 class="h2">Drawn to roles with real<br><span class="hl hl-peach">scope to build and shape.</span></h2>
+      <div>
+        <h2 class="h2" style="cursor:pointer;" onclick="toggleSection(this)">Drawn to roles with real<br><span class="hl hl-peach">scope to build and shape.</span></h2>
+        <div class="collapsible-body">
         <p class="body-text">
           Flexion is at a stage where a TA Partner can genuinely shape the hiring function,
           the team composition, and the employer brand. That kind of scope is what I am drawn to.
@@ -841,6 +845,7 @@
             </div>
           </div>
         </div>
+        </div>
       </div>
     </div>
   </section>
@@ -851,8 +856,9 @@
   <section id="experience" class="section">
     <div class="section-row">
       <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">/003 Experience / <span class="chevron">▾</span></div>
-      <div class="collapsible-body">
-        <h2 class="h2">Eight years of<br><span class="hl hl-mint">building things that work.</span></h2>
+      <div>
+        <h2 class="h2" style="cursor:pointer;" onclick="toggleSection(this)">Eight years of<br><span class="hl hl-mint">building things that work.</span></h2>
+        <div class="collapsible-body">
         <p class="body-text">
           All at one company, across four roles &mdash; each one with broader scope and higher ownership than the last.
         </p>
@@ -928,6 +934,7 @@
           <span class="tag">Workday &middot; Avature</span>
           <span class="tag">High-Growth Environments</span>
         </div>
+        </div>
       </div>
     </div>
   </section>
@@ -938,8 +945,9 @@
   <section id="plan" class="section">
     <div class="section-row">
       <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">/004 First 90 Days / <span class="chevron">▾</span></div>
-      <div class="collapsible-body">
-        <h2 class="h2">How I&rsquo;d build<br><span class="hl hl-lav">Flexion&rsquo;s hiring engine.</span></h2>
+      <div>
+        <h2 class="h2" style="cursor:pointer;" onclick="toggleSection(this)">How I&rsquo;d build<br><span class="hl hl-lav">Flexion&rsquo;s hiring engine.</span></h2>
+        <div class="collapsible-body">
         <p class="body-text">
           Here is how I would approach the first three months at Flexion.
         </p>
@@ -977,6 +985,7 @@
               <li>90-day retro with founders: what&rsquo;s working, what to double down on</li>
             </ul>
           </div>
+        </div>
         </div>
       </div>
     </div>
