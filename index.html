@@ -614,6 +614,40 @@
       letter-spacing: 0.04em;
     }
 
+    /* ── COLLAPSIBLE ── */
+    .collapsible-trigger {
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .collapsible-trigger:hover { color: var(--text); }
+
+    .chevron {
+      font-style: normal;
+      font-family: inherit;
+      font-size: 10px;
+      line-height: 1.6;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .section-row.collapsed .chevron { transform: rotate(-90deg); }
+
+    .collapsible-body {
+      overflow: hidden;
+      max-height: 4000px;
+      opacity: 1;
+      transition: max-height 0.45s ease, opacity 0.25s ease;
+    }
+
+    .section-row.collapsed .collapsible-body {
+      max-height: 0;
+      opacity: 0;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -669,8 +703,8 @@
   <!-- STATS -->
   <div class="section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="section-row">
-      <div class="section-tag">Numbers /</div>
-      <div>
+      <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">Numbers / <span class="chevron">▾</span></div>
+      <div class="collapsible-body">
         <div class="stat-grid">
           <div class="stat-item">
             <div class="stat-value">8+</div>
@@ -706,8 +740,8 @@
   <!-- THREE PILLARS -->
   <section id="value" class="section">
     <div class="section-row">
-      <div class="section-tag">/001 Value /</div>
-      <div>
+      <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">/001 Value / <span class="chevron">▾</span></div>
+      <div class="collapsible-body">
         <h2 class="h2">Three things I bring<br><span class="hl hl-lav">to this role.</span></h2>
         <p class="body-text">
           Three areas where I have built direct, hands-on experience:
@@ -753,8 +787,8 @@
   <!-- WHY FLEXION -->
   <section id="why" class="section">
     <div class="section-row">
-      <div class="section-tag">/002 Why Flexion /</div>
-      <div>
+      <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">/002 Why Flexion / <span class="chevron">▾</span></div>
+      <div class="collapsible-body">
         <h2 class="h2">Drawn to roles with real<br><span class="hl hl-peach">scope to build and shape.</span></h2>
         <p class="body-text">
           Flexion is at a stage where a TA Partner can genuinely shape the hiring function,
@@ -816,8 +850,8 @@
   <!-- EXPERIENCE -->
   <section id="experience" class="section">
     <div class="section-row">
-      <div class="section-tag">/003 Experience /</div>
-      <div>
+      <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">/003 Experience / <span class="chevron">▾</span></div>
+      <div class="collapsible-body">
         <h2 class="h2">Eight years of<br><span class="hl hl-mint">building things that work.</span></h2>
         <p class="body-text">
           All at one company, across four roles &mdash; each one with broader scope and higher ownership than the last.
@@ -903,8 +937,8 @@
   <!-- FIRST 90 DAYS -->
   <section id="plan" class="section">
     <div class="section-row">
-      <div class="section-tag">/004 First 90 Days /</div>
-      <div>
+      <div class="section-tag collapsible-trigger" onclick="toggleSection(this)">/004 First 90 Days / <span class="chevron">▾</span></div>
+      <div class="collapsible-body">
         <h2 class="h2">How I&rsquo;d build<br><span class="hl hl-lav">Flexion&rsquo;s hiring engine.</span></h2>
         <p class="body-text">
           Here is how I would approach the first three months at Flexion.
@@ -983,5 +1017,10 @@
     <span class="footer-copy">Built for Flexion /</span>
   </footer>
 
+  <script>
+    function toggleSection(trigger) {
+      trigger.closest('.section-row').classList.toggle('collapsed');
+    }
+  </script>
 </body>
 </html>
