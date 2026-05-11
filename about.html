@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hi, I'm Annika — Talent Acquisition Partner for Flexion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0ebe4;
+      --border: #ddd8d0;
+      --text: #111110;
+      --text-secondary: #4a4845;
+      --text-muted: #a09d98;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HIGHLIGHT BLOB ── */
+    .hl { position: relative; display: inline; }
+    .hl::before, .hl::after {
+      content: '';
+      position: absolute;
+      width: 60%; height: 200%;
+      top: -50%;
+      border-radius: 50%;
+      filter: blur(26px);
+      pointer-events: none;
+    }
+    .hl::before { left: -10%; }
+    .hl::after  { right: -10%; }
+    .hl::before         { background: rgba(205, 112, 100, 0.44); }
+    .hl::after          { background: rgba(220, 155, 88, 0.40); }
+    .hl-lav::before     { background: rgba(118, 84, 198, 0.46); }
+    .hl-lav::after      { background: rgba(195, 100, 130, 0.42); }
+    .hl-peach::before   { background: rgba(222, 138, 78, 0.48); }
+    .hl-peach::after    { background: rgba(215, 175, 80, 0.38); }
+    .hl-mint::before    { background: rgba(68, 155, 118, 0.46); }
+    .hl-mint::after     { background: rgba(80, 175, 155, 0.38); }
+
+    /* ── SLIDESHOW WRAPPER ── */
+    #slideshow {
+      position: fixed;
+      inset: 0;
+    }
+
+    /* ── SLIDE ── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 120px 120px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── SLIDE CONTENT ── */
+    .slide-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 36px;
+    }
+
+    .slide-heading {
+      font-size: clamp(48px, 6vw, 82px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      color: var(--text);
+      margin-bottom: 36px;
+    }
+
+    .slide-heading .light { font-weight: 300; }
+
+    .slide-body {
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .slide-body strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── TRAIT PAIR ── */
+    .trait-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 8px;
+      max-width: 860px;
+    }
+
+    .trait-card {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .trait-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .trait-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .trait-body {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── PROJECT SLIDE ── */
+    .project-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .outcome-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .outcome-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── CLOSING SLIDE ── */
+    .closing-quote {
+      font-size: clamp(22px, 2.8vw, 38px);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.55;
+      max-width: 860px;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+
+    .closing-quote strong { font-weight: 700; }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-outline {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      border: 1px solid var(--text);
+      padding: 10px 20px;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-outline:hover { background: var(--text); color: var(--bg); }
+
+    .btn-arrow {
+      width: 38px; height: 38px;
+      border: 1px solid var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-arrow:hover { background: var(--text); color: var(--bg); }
+
+    /* ── NAV BAR ── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(240, 235, 228, 0.9);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-back {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.15s;
+    }
+
+    .nav-back:hover { color: var(--text); }
+
+    .nav-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* ── CONTROLS ── */
+    #controls {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      left: 40px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #counter {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .arrow-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .arrow-btn {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--text);
+      transition: background 0.15s, border-color 0.15s;
+      font-family: inherit;
+    }
+
+    .arrow-btn:hover {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .arrow-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .arrow-btn:disabled:hover {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress {
+      position: fixed;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: var(--text);
+      transition: width 0.4s ease;
+      z-index: 50;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .slide { padding: 80px 28px 100px; }
+      .trait-pair { grid-template-columns: 1fr; gap: 20px; }
+      #nav { padding: 0 20px; }
+      #controls { left: 20px; right: 20px; bottom: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <div id="nav">
+    <a class="nav-back" href="index.html">&larr; Full profile</a>
+    <span class="nav-title">Annika Schlendermann &mdash; For Flexion</span>
+  </div>
+
+  <!-- SLIDESHOW -->
+  <div id="slideshow">
+
+    <!-- SLIDE 1: HERO -->
+    <div class="slide active">
+      <div class="slide-tag">About /</div>
+      <h1 class="slide-heading">
+        Hi, I&rsquo;m<br>
+        <span class="hl">Annika.</span>
+      </h1>
+      <p class="slide-body">
+        I am a <strong>Talent Acquisition Partner based in Z&uuml;rich</strong>
+        with eight years of experience building hiring engines in fast-moving,
+        technical environments.<br><br>
+        I believe that <strong>who you hire defines what you become</strong> &mdash;
+        especially in the early days of a company.
+        This is why I want to be Flexion&rsquo;s first TA Partner.
+      </p>
+    </div>
+
+    <!-- SLIDE 2: A TRUE TALENT PARTNER -->
+    <div class="slide">
+      <div class="slide-tag">/001 Who I Am /</div>
+      <h2 class="slide-heading">
+        A true<br>
+        <span class="hl hl-peach"><strong>Talent Partner.</strong></span>
+      </h2>
+      <p class="slide-body">
+        I started in employer branding, moved into senior recruiting,
+        led a team through a restructuring, and spent two years in global change management.<br><br>
+        That breadth shapes how I work: I think in systems,
+        communicate across every level from intern to C-suite,
+        and treat every hire as a <strong>long-term bet on the team&rsquo;s culture</strong>.
+      </p>
+    </div>
+
+    <!-- SLIDE 3: TRAITS 1/2 -->
+    <div class="slide">
+      <div class="slide-tag">/001 Who I Am /</div>
+      <div class="trait-pair">
+        <div class="trait-card">
+          <div class="trait-label">/01</div>
+          <div class="trait-title">Ownership, not process-following</div>
+          <div class="trait-body">
+            I do not wait for a brief to be perfect. I run intake sessions, challenge assumptions,
+            and build the pipeline before being asked.
+            When something is broken, I fix it &mdash; and tell people why.
+          </div>
+        </div>
+        <div class="trait-card">
+          <div class="trait-label">/02</div>
+          <div class="trait-title">Genuine curiosity about hard problems</div>
+          <div class="trait-body">
+            I have always recruited in technical domains: Software Engineering, Data &amp; AI, ML.
+            I read about the problems <em>before</em> I read the job spec.
+            Understanding what researchers actually solve is how I build credibility &mdash; and better pipelines.
+          </div>
+        </div>
+        <div class="trait-card">
+          <div class="trait-label">/03</div>
+          <div class="trait-title">Direct and honest communication</div>
+          <div class="trait-body">
+            I tell candidates what the role really is. I tell hiring managers when a brief is unrealistic.
+            I named the gap in my cover letter because transparency builds better relationships than spin.
+          </div>
+        </div>
+        <div class="trait-card">
+          <div class="trait-label">/04</div>
+          <div class="trait-title">Comfort with ambiguity</div>
+          <div class="trait-body">
+            I built Avanade&rsquo;s DACH employer brand before there was a strategy, a budget, or a brief.
+            I rebuilt a TA function during a restructuring with no playbook.
+            Blank pages do not intimidate me &mdash; they are where I do my best work.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: PROJECT — EMPLOYER BRAND -->
+    <div class="slide">
+      <div class="slide-tag">/002 Projects /</div>
+      <div class="project-meta">2019 &ndash; 2021 &middot; Avanade DACH</div>
+      <h2 class="slide-heading light">
+        DACH Employer Brand<br>
+        <span class="hl hl-lav">Relaunch &mdash; from Zero.</span>
+      </h2>
+      <p class="slide-body">
+        Flexion has no employer brand yet. I have built one from scratch.
+        Led the full lifecycle: agency briefing, employee survey design, EVP development,
+        content strategy, platform rollout, and editorial calendar &mdash;
+        with <strong>no existing template and limited budget</strong>.
+        Subsequently appointed to the global EVP leadership team for 30,000+ employees.
+      </p>
+      <div class="outcome-row">
+        <span class="outcome-tag">250k+ candidate reach in year 1</span>
+        <span class="outcome-tag">+38% employee referrals</span>
+        <span class="outcome-tag">+40% brand identification</span>
+        <span class="outcome-tag">Global EVP team</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: PROJECT — TA REBUILD -->
+    <div class="slide">
+      <div class="slide-tag">/002 Projects /</div>
+      <div class="project-meta">2023 &ndash; 2024 &middot; Avanade Germany</div>
+      <h2 class="slide-heading light">
+        TA Function Rebuild &mdash;<br>
+        <span class="hl hl-peach">Process &amp; Direct Sourcing.</span>
+      </h2>
+      <p class="slide-body">
+        Inherited a setup that was heavily agency-dependent with no structured reporting.
+        Built it into a <strong>data-driven direct sourcing function</strong>:
+        KPI dashboards from scratch, intake briefing frameworks, proactive sourcing playbooks,
+        27% time-to-fill reduction. Did all of this during a major organizational restructuring.
+      </p>
+      <div class="outcome-row">
+        <span class="outcome-tag">27% time-to-fill reduction</span>
+        <span class="outcome-tag">80% agency dependency cut</span>
+        <span class="outcome-tag">~CHF 300K saved / year</span>
+        <span class="outcome-tag">95% fulfillment through restructure</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: PROJECT — NICHE SOURCING -->
+    <div class="slide">
+      <div class="slide-tag">/002 Projects /</div>
+      <div class="project-meta">2017 &ndash; 2021 &middot; Avanade DACH</div>
+      <h2 class="slide-heading light">
+        Niche Technical Sourcing &mdash;<br>
+        <span class="hl hl-mint">Engineering, Data &amp; AI.</span>
+      </h2>
+      <p class="slide-body">
+        Four years sourcing passive talent in markets where candidates did not apply:
+        Software Engineering, Analytics, Data &amp; AI.
+        Built LinkedIn campaigns, research lab outreach, referral programs,
+        and <strong>structured university partnerships</strong>.
+        The profiles were specialized, the market was competitive, inbound was not enough.
+      </p>
+      <div class="outcome-row">
+        <span class="outcome-tag">35–40% cold outreach response rate</span>
+        <span class="outcome-tag">25% interview conversion</span>
+        <span class="outcome-tag">25+ annual hires</span>
+        <span class="outcome-tag">45% female representation</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: WHY FLEXION — BUILD -->
+    <div class="slide">
+      <div class="slide-tag">/003 Why Flexion /</div>
+      <h2 class="slide-heading">
+        I want to build<br>
+        <span class="hl">something, not<br>maintain it.</span>
+      </h2>
+      <p class="slide-body">
+        I have spent eight years inside a large company.
+        I have learned rigour, process, and stakeholder management.
+        What I have not had is a <strong>blank page</strong>.<br><br>
+        Flexion has no hiring engine yet &mdash; no ATS setup, no sourcing playbook,
+        no employer brand, no interview process.
+        Building that from the first line is what I want to do next.
+        <strong>Not inherit it. Not optimize it. Build it.</strong>
+      </p>
+    </div>
+
+    <!-- SLIDE 8: WHY FLEXION — MISSION + TEAM -->
+    <div class="slide">
+      <div class="slide-tag">/003 Why Flexion /</div>
+      <h2 class="slide-heading">
+        The mission and the<br>
+        <span class="hl hl-lav">team are world-class.</span>
+      </h2>
+      <p class="slide-body">
+        I have read the Flexion Reflect v0 paper. I know what Isaac Gym enabled.
+        I understand the significance of ANYmal in legged locomotion research.<br><br>
+        Working directly with the scientists who built these things &mdash;
+        and <strong>shaping who joins them next</strong> &mdash;
+        means the quality bar for every hire is set by people who have already
+        raised the state of the art. That is a rare and motivating context.
+      </p>
+    </div>
+
+    <!-- SLIDE 9: CLOSING -->
+    <div class="slide">
+      <div class="slide-tag">/ Let&rsquo;s talk</div>
+      <p class="closing-quote">
+        &ldquo;The best engineers in <strong>robotics, ML, and control systems</strong>
+        should know that Flexion exists, believe in what it is building,
+        and want to be part of it.
+        <strong>That is what I would come in to build</strong> &mdash;
+        from the first outreach message to the offer call to the employer brand
+        that makes the next hire easier than the last.&rdquo;
+      </p>
+      <div class="cta-row">
+        <a href="index.html" class="btn-outline">See full profile</a>
+        <a href="mailto:Annika.schlendermann@outlook.com" class="btn-outline">Get in touch</a>
+        <a href="mailto:Annika.schlendermann@outlook.com" class="btn-arrow">&rsaquo;</a>
+      </div>
+    </div>
+
+  </div><!-- /slideshow -->
+
+  <!-- BOTTOM CONTROLS -->
+  <div id="controls">
+    <span id="counter">1 / 9</span>
+    <div class="arrow-group">
+      <button class="arrow-btn" id="prev" onclick="changeSlide(-1)" disabled>&larr;</button>
+      <button class="arrow-btn" id="next" onclick="changeSlide(1)">&rarr;</button>
+    </div>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress"></div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('counter');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const progress = document.getElementById('progress');
+    const total = slides.length;
+    let current = 0;
+
+    function updateSlide() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      counter.textContent = (current + 1) + ' / ' + total;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === total - 1;
+      progress.style.width = ((current + 1) / total * 100) + '%';
+    }
+
+    function changeSlide(dir) {
+      const next = current + dir;
+      if (next >= 0 && next < total) {
+        current = next;
+        updateSlide();
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+    });
+
+    updateSlide();
+  </script>
+
+</body>
+</html>
