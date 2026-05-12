@@ -397,6 +397,10 @@
         I believe that <strong>who you hire shapes what you become</strong> &mdash;
         especially in the early days of a company.
       </p>
+      <div style="margin-top: 60px; display: flex; align-items: center; gap: 24px;">
+        <div id="qrcode"></div>
+        <p style="font-size: 13px; color: var(--text-muted); font-family: 'Space Mono', monospace; max-width: 200px; line-height: 1.6;">In case you would prefer to look at this presentation on your phone</p>
+      </div>
     </div>
 
     <!-- SLIDE 2: A TRUE TALENT PARTNER -->
@@ -586,6 +590,18 @@
     });
 
     updateSlide();
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    new QRCode(document.getElementById('qrcode'), {
+      text: window.location.href,
+      width: 96,
+      height: 96,
+      colorDark: '#111110',
+      colorLight: '#f0ebe4',
+      correctLevel: QRCode.CorrectLevel.M
+    });
   </script>
 
 </body>
