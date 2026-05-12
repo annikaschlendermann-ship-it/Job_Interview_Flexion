@@ -363,8 +363,13 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .slide { padding: 80px 28px 100px; }
+      .slide { padding: 72px 24px 90px; justify-content: flex-start; overflow-y: auto; }
+      .slide-heading { font-size: clamp(32px, 8vw, 48px); margin-bottom: 24px; }
+      .slide-body { font-size: 17px; }
+      .slide-bullets li { font-size: 17px; }
+      .slide-tag { margin-bottom: 20px; }
       .trait-pair { grid-template-columns: 1fr; gap: 20px; }
+      .nav-title { display: none; }
       #nav { padding: 0 20px; }
       #controls { left: 20px; right: 20px; bottom: 24px; }
     }
@@ -503,11 +508,11 @@
         Looking for scope<br>
         <span class="hl">to build and shape.</span>
       </h2>
-      <p class="slide-body">
-        Eight years in a large, structured company gave me rigour and process ownership.
-        Now I want to <strong>build the TA function from the ground up</strong> &mdash;
-        ATS, sourcing playbook, employer brand, interview process.
-      </p>
+      <ul class="slide-bullets">
+        <li>Eight years in a large, structured company — rigour, process ownership, stakeholder management at every level</li>
+        <li>Now looking for a context where I can build the TA function from scratch</li>
+        <li>ATS setup &nbsp;·&nbsp; Sourcing playbook &nbsp;·&nbsp; Employer brand &nbsp;·&nbsp; Interview process</li>
+      </ul>
     </div>
 
     <!-- SLIDE 8: WHY FLEXION — MISSION + TEAM -->
@@ -517,11 +522,11 @@
         The mission and the<br>
         <span class="hl hl-lav">team are world-class.</span>
       </h2>
-      <p class="slide-body">
-        The Flexion Reflect thesis is compelling. The founding team brings world-class research depth &mdash;
-        now applied in real-world environments.<br><br>
-        <strong>Contributing to who joins that team next</strong> is a meaningful position.
-      </p>
+      <ul class="slide-bullets">
+        <li>Founding team with exceptional research depth in robotics and RL</li>
+        <li>Building something technically significant — and deploying it in the real world</li>
+        <li>Contributing to who joins that team next is a meaningful position</li>
+      </ul>
       <div class="cta-row">
         <a href="index.html" class="btn-outline">See full profile</a>
       </div>
